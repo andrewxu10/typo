@@ -22,10 +22,20 @@ class Admin::CategoriesController < Admin::BaseController
   end
 
   private
+  
+  # stub(:params).to be ({categories_id: Category.first.id, id: Article.first.id })
+  # post :edit, params: params
+  # expect(@category).to be assigned (Category.first)
 
   def new_or_edit
     @categories = Category.find(:all)
-    @category = Category.find(params[:id])
+    
+    if params[:id] != nil
+      @category = Category.find(params[:id])
+    else
+      @category = Category.new
+    end
+    
     @category.attributes = params[:category]
     if request.post?
       respond_to do |format|
