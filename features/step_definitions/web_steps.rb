@@ -43,6 +43,13 @@ Given /^the blog is set up$/ do
                 :state => 'active'})
 end
 
+# LOOK AT FACTORYGIRL 
+#
+#
+#
+#
+#
+#
 And /^blog id1 and id2 are set up$/ do
   Content.delete_all
   
@@ -57,8 +64,23 @@ And /^blog id1 and id2 are set up$/ do
                 :title => 'id2',
                 #:profile_id => 1,
                 })
+  
+  Feedback.create!({:body => 'wow good article'
+                })
+  
+  Feedback.create!({:body => 'bad opinions here'
+                })
                 
 end
+#
+#
+#
+#
+#
+#
+#
+#
+#
 
 #comments, comments, title (orig), author (orig)
 

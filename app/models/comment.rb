@@ -10,6 +10,18 @@ class Comment < Feedback
   attr_accessor :user_agent
   attr_accessor :referrer
   attr_accessor :permalink
+  
+  def migrate_comments(article_id1, article_id2)
+    
+    #@comments_from_article_1 = content.where(parent_id: article_id1).all
+    
+    @comments_from_article_2 = content.where(parent_id: article_id2).all
+    
+    @comments_from_article_2.each do |comment|
+      comment.parent_id = article_id1
+    end
+    
+  end
 
   def notify_user_via_email(user)
     if user.notify_via_email?

@@ -70,6 +70,28 @@ class Article < Content
       self.settings = {}
     end
   end
+  
+  #
+  #
+  #
+  #
+  #
+  #
+  def merge_with(other_article_id)
+    
+    #may be redundant
+    self.content_fields[0] += Article.find(other_article_id).first.content_fields[0]
+    
+    #delete article 2 after the merge
+    Article.find(other_article_id).destroy!
+    
+  end
+  #
+  #
+  #
+  #
+  #
+  #
 
   def set_permalink
     return if self.state == 'draft'
@@ -372,7 +394,7 @@ class Article < Content
   def published=(newval)
     state.published = cast_to_boolean(newval)
   end
-
+  
   def content_fields
     [:body, :extended]
   end

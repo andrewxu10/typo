@@ -11,6 +11,9 @@ class Content < ActiveRecord::Base
   has_many :redirections
   has_many :redirects, :through => :redirections, :dependent => :destroy
 
+
+  
+  
   def notify_users=(collection)
     return notify_users.clear if collection.empty?
     self.class.transaction do

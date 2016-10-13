@@ -1,0 +1,2 @@
+article (inherets)---> content (inherets)---> ACTIVERECORD_BASE
+comment (inherets)---> feedback (inherets)---> content (inherets)---> ACTIVERECORD_BASE
