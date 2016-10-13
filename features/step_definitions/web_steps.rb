@@ -43,7 +43,29 @@ Given /^the blog is set up$/ do
                 :state => 'active'})
 end
 
-And /
+And /^blog id1 and id2 are set up$/ do
+  Content.delete_all
+  
+  Content.create!({:author => 'admin',
+                :body => 'hello world',
+                :title => 'id1',
+                #:profile_id => 1,
+                })
+                
+  Content.create!({:author => 'Bill',
+                :body => 'Lorum ipsum',
+                :title => 'id2',
+                #:profile_id => 1,
+                })
+                
+end
+
+#comments, comments, title (orig), author (orig)
+
+# And /^there is a category set up$/ do
+#   Category.create!({:category_name
+#                     :category_keywords
+#                     :category_description})
 
 And /^I am logged into the admin panel$/ do
   visit '/accounts/login'

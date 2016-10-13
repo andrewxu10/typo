@@ -9,8 +9,8 @@ Feature: Write Articles
 
   Scenario: Successfully write articles
     Given I am on the new article page
-    When I fill in "article_title" with "Foobar"
-    And I fill in "article__body_and_extended_editor" with "Lorem Ipsum"
+    When I fill in "article_title" with "Foobar1"
+    And I fill in "article__body_and_extended_editor" with "Lorem Ipsum1"
     And I press "Publish"
     Then I should be on the admin content page
     When I go to the home page
