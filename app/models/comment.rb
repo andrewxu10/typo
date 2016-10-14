@@ -11,18 +11,20 @@ class Comment < Feedback
   attr_accessor :referrer
   attr_accessor :permalink
   
-  def migrate_comments(article_id1, article_id2)
-    
-    #@comments_from_article_1 = content.where(parent_id: article_id1).all
-    
-    @comments_from_article_2 = content.where(parent_id: article_id2).all
-    
-    @comments_from_article_2.each do |comment|
-      comment.parent_id = article_id1
-    end
-    
-  end
+  # def migrate_comments(article_id1, article_id2)
+  #   #@comments_from_article_1 = comment.where(article_id: article_id1).all
 
+  #   @comments_from_article_2 = Comment.where(article_id = article_id2)
+    
+  #   @comments_from_article_2.each do |comment|
+  #     comment.article_id = article_id1
+  #   end
+  # end
+
+  def change_article_id(new_article_id)
+    self.article_id = new_article_id
+  end
+  
   def notify_user_via_email(user)
     if user.notify_via_email?
       EmailNotify.send_comment(self, user)

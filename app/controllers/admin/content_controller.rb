@@ -26,6 +26,15 @@ class Admin::ContentController < Admin::BaseController
   def new
     new_or_edit
   end
+  
+  def merge
+    @article = Article.find(params[:merge_with])
+    if Article.exists? params[:merge_with]
+       @article.merge_content(params[:other_id]) unless params[:id] == params[:other_id]
+    end
+    @article.save
+    
+  end
 
   def edit
     @article = Article.find(params[:id])
@@ -34,6 +43,30 @@ class Admin::ContentController < Admin::BaseController
       flash[:error] = _("Error, you are not allowed to perform this action")
       return
     end
+    
+
+    
+    
+    # id = params[:id]
+    # id = params[:article][:id] if params[:article] && params[:article][:id]
+    
+    # @article = Article.get_or_build_article(id)
+    # puts @article
+    
+    # @article.text_filter = current_user.text_filter if current_user.simple_editor?
+    # puts @article
+
+    
+    # puts "Important Below"
+    # puts params.inspect
+    # puts params
+    # puts @article
+    # puts "Important Above"
+    
+    # if !params[:merge].blank?
+    #   @article += Article.find(params[:merge])
+    # end
+    
     new_or_edit
   end
 
@@ -139,6 +172,14 @@ class Admin::ContentController < Admin::BaseController
 
   def real_action_for(action); { 'add' => :<<, 'remove' => :delete}[action]; end
 
+  # def edit
+  #   @article = Article.find(params[:id])
+  #   unless @article.access_by? current_user
+  #     redirect_to :action => 'index'
+  #     flash[:error] = _("Error, you are not allowed to perform this action")
+  #     return
+  #   end
+
   def new_or_edit
     id = params[:id]
     id = params[:article][:id] if params[:article] && params[:article][:id]
@@ -180,6 +221,15 @@ class Admin::ContentController < Admin::BaseController
     @images = Resource.images_by_created_at.page(params[:page]).per(10)
     @resources = Resource.without_images_by_filename
     @macros = TextFilter.macro_filters
+    # puts'!!!!!!!!!!!!!!!!!!!!!!!!'
+    # puts'!!!!!!!!!!!!!!!!!!!!!!!!'
+    # puts'!!!!!!!!!!!!!!!!!!!!!!!!'
+    # puts'!!!!!!!!!!!!!!!!!!!!!!!!'
+    # puts params.inspect
+    # puts'!!!!!!!!!!!!!!!!!!!!!!!!'
+    # puts'!!!!!!!!!!!!!!!!!!!!!!!!'
+    # puts'!!!!!!!!!!!!!!!!!!!!!!!!'
+    # puts'!!!!!!!!!!!!!!!!!!!!!!!!'
     render 'new'
   end
 

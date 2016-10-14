@@ -77,15 +77,29 @@ class Article < Content
   #
   #
   #
-  def merge_with(other_article_id)
+  def merge_content(other_article_id)
     
-    #may be redundant
-    self.content_fields[0] += Article.find(other_article_id).first.content_fields[0]
+    self.body += Article.find(other_article_id).body
     
-    #delete article 2 after the merge
+    Comment.where(article_id => other_article_id).each do |comment|
+      #comment.change_article_id(self.id)
+      comment.article_id = self.id
+    end
+    
     Article.find(other_article_id).destroy!
     
   end
+  
+  # def migrate_comments(article_id1, article_id2)
+  #   #@comments_from_article_1 = content.where(article_id: article_id1).all
+
+  #   @comments_from_article_2 = content.where(article_id => article_id2)
+    
+  #   @comments_from_article_2.each do |comment|
+  #     comment.article_id = article_id1
+  #   end
+  # end
+  
   #
   #
   #
