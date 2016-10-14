@@ -151,7 +151,7 @@
   
 
   
-    <% form_tag('admin/content', method: => 'post') do %>
+    <% form_tag('admin/content', method: => post) do %>
       <%= label_tag(:q, "Merge") %>
       <%= text_field_tag(:q) %>
       <%= submit_tag("Merge") %>
